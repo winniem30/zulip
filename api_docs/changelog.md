@@ -20,6 +20,15 @@ format used by the Zulip server that they are interacting with.
 
 ## Changes in Zulip 12.0
 
+**Feature level 480**
+
+* [`GET /streams/{stream_id}`](/api/get-stream-by-id): Details of
+  archived channels can now be fetched.
+* [`GET /streams/{stream_id}/members`](/api/get-subscribers):
+  Subscribers of archived channels can now be fetched.
+* [`GET /users/me/{stream_id}/topics`](/api/get-stream-topics):
+  Topics in archived channels can now be fetched.
+
 **Feature level 479**
 
 * [`GET /thumbnail/status/{realm_id_str}/{filename}`](/api/check-thumbnail-status): Added
@@ -3181,9 +3190,11 @@ user's profile.
   `emails_restricted_to_domains`, `invite_required`, and
   `waiting_period_threshold` settings can no longer be changed by
   organization administrators who are not owners.
-* `PATCH /realm/domains`, `POST /realm/domains`, `DELETE
-  /realm/domains`: Organization administrators who are not owners can
-  no longer access these endpoints.
+* [`POST /realm/domains`](/api/add-realm-domain),
+  [`PATCH /realm/domains/{domain}`](/api/patch-realm-domain),
+  [`DELETE /realm/domains/{domain}`](/api/delete-realm-domain):
+  Organization administrators who are not owners can no longer access
+  these endpoints.
 
 **Feature level 142**
 
@@ -3800,8 +3811,8 @@ No changes; feature level used for Zulip 4.0 release.
   parameter `default_language`.
 * `POST /users/me/tutorial_status`: Removed unnecessary JSON-encoding of string
   parameter `status`.
-* `POST /realm/domains`: Removed unnecessary JSON-encoding of string
-  parameter `domain`.
+* [`POST /realm/domains`](/api/add-realm-domain): Removed unnecessary
+  JSON-encoding of string parameter `domain`.
 * `PATCH /default_stream_groups/{user_id}`: Removed unnecessary JSON-encoding of string
   parameters `new_group_name` and `new_description`.
 * `POST /users/me/hotspots`: Removed unnecessary JSON-encoding of string

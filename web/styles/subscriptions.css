@@ -253,6 +253,10 @@ h4.user_group_setting_subsection_title {
     }
 }
 
+#stream_creation_form .subscriber_list_container {
+    max-height: var(--new-stream-subscriber-list-max-height);
+}
+
 .subscriber-name,
 .subscriber-email {
     padding: 5px;
@@ -468,7 +472,6 @@ h4.user_group_setting_subsection_title {
             text-align: center;
             text-overflow: ellipsis;
             white-space: nowrap;
-            margin-left: 5px;
         }
 
         .stream-info-title,
@@ -495,7 +498,7 @@ h4.user_group_setting_subsection_title {
                 justify-content: space-between;
 
                 .selected-stream,
-                .selected-group-name {
+                .selected-group {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -519,16 +522,7 @@ h4.user_group_setting_subsection_title {
                     }
                 }
 
-                .selected-group {
-                    display: flex;
-                    align-items: center;
-                    overflow: hidden;
-                }
-
-                .deactivated-user-group-icon-right {
-                    margin-right: 5px;
-                    margin-left: 3px;
-                    opacity: 0.6;
+                .deactivated-user-group-icon {
                     font-size: var(--base-font-size-px);
                 }
             }
@@ -1131,6 +1125,7 @@ h4.user_group_setting_subsection_title {
         .add-user-list-filter {
             width: 140px;
             float: right;
+            margin-top: 10px;
         }
 
         #user_group_creation_form,
@@ -1215,26 +1210,8 @@ h4.user_group_setting_subsection_title {
             }
         }
 
-        #open_group_info_modal {
-            display: flex;
-            align-items: center;
-        }
-
         .button-group {
             margin-left: auto;
-
-            /* This icon is narrower in width, we have to explicitly
-               set it's width to 1em so that it vertically aligns with
-               other buttons near it. */
-            .fa-pencil {
-                width: 1em;
-            }
-
-            .deactivate,
-            .reactivate {
-                margin-right: 3px;
-                text-decoration: none;
-            }
         }
 
         .large-icon {
@@ -1252,7 +1229,6 @@ h4.user_group_setting_subsection_title {
             }
         }
 
-        .group_change_property_info,
         .stream_change_property_info {
             vertical-align: top;
             margin: 0 5px 0 0;
@@ -1563,7 +1539,6 @@ h4.user_group_setting_subsection_title {
             }
         }
 
-        .group_change_property_info,
         .stream_change_property_info {
             /* For small widths where there is not enough space
             to show alert beside stream name we set its display

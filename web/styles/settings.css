@@ -358,14 +358,14 @@ h3,
     padding: 0 25px 0 6px;
     color: var(--color-text-default);
     border-radius: 4px;
-    border: 1px solid hsl(0deg 0% 80%);
+    border: var(--input-border-width) solid var(--color-border-legacy-input);
     cursor: pointer;
-    background-color: hsl(0deg 0% 100%);
+    background-color: var(--color-background-legacy-input);
     font-size: inherit;
 
     &:disabled {
         cursor: not-allowed;
-        background-color: hsl(0deg 0% 93%);
+        background-color: var(--color-background-disabled-settings-select);
 
         /* This is reset for other browsers to use Chrome's opacity. */
         opacity: 0.7;
@@ -1406,6 +1406,7 @@ label.preferences-radio-choice-label {
 
 #show_api_key {
     .api-key-container {
+        padding-bottom: 10px;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -1989,10 +1990,10 @@ label.preferences-radio-choice-label {
    rendered realm and channel descriptions. */
 .settings-view-only-textarea {
     margin: 0;
-    /* 5px at 16px and 10px at 16px */
-    padding: 0.3125em 0.625em;
+    /* 5px at 16px */
+    padding: 0.3125em var(--view-only-field-horizontal-padding);
     background-color: var(--background-color-view-only-textarea);
-    border: 1px solid var(--border-color-textarea);
+    border: var(--input-border-width) solid var(--border-color-textarea);
     border-radius: 4px;
 }
 
@@ -2458,6 +2459,25 @@ label.preferences-radio-choice-label {
     .topic-to-use-wrapper .dropdown-widget-button,
     .integration-url-stream-wrapper .dropdown-widget-button {
         width: 75%;
+    }
+
+    .integration-url-topic {
+        position: relative;
+    }
+
+    #integration-url-topic-placeholder {
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        pointer-events: none;
+        visibility: hidden;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.visible {
+            visibility: visible;
+        }
     }
 
     #stream-not-specified-notice {

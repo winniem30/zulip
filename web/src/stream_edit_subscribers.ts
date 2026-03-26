@@ -20,6 +20,7 @@ import * as loading from "./loading.ts";
 import * as peer_data from "./peer_data.ts";
 import * as people from "./people.ts";
 import type {User} from "./people.ts";
+import * as resize from "./resize.ts";
 import * as scroll_util from "./scroll_util.ts";
 import {current_user, realm} from "./state_data.ts";
 import * as stream_data from "./stream_data.ts";
@@ -79,6 +80,7 @@ function show_stream_subscription_request_error_result(error_message: string): v
     scroll_util
         .get_content_element($stream_subscription_req_result_elem)
         .html(rendered_error_banner);
+    resize.resize_stream_subscribers_list();
 }
 
 function show_stream_subscription_request_success_result({
@@ -114,6 +116,7 @@ function show_stream_subscription_request_success_result({
     scroll_util
         .get_content_element($stream_subscription_req_result_elem)
         .html(rendered_success_banner);
+    resize.resize_stream_subscribers_list();
 }
 
 function update_notification_choice_checkbox(added_user_count: number): void {
@@ -152,15 +155,16 @@ export function enable_subscriber_management({
         return peer_data.potential_subscribers(stream_id);
     }
 
-    const update_notification_choice = function (): void {
+    const pill_update_callback = function (): void {
         void stream_edit_update_notification_choice();
+        resize.resize_stream_subscribers_list();
     };
     pill_widget = add_subscribers_pill.create({
         $pill_container,
         get_potential_subscribers,
-        onPillCreateAction: update_notification_choice,
-        onPillRemoveAction: update_notification_choice,
-        add_button_pill_update_callback: update_notification_choice,
+        onPillCreateAction: pill_update_callback,
+        onPillRemoveAction: pill_update_callback,
+        add_button_pill_update_callback: pill_update_callback,
         get_user_groups: user_groups.get_all_realm_user_groups,
         with_add_button: true,
     });
@@ -204,6 +208,7 @@ async function render_subscriber_list_widget(
     });
     loading.destroy_indicator($(".subscriber-list-settings-loading"));
     $(".subscriber_list_settings_container").toggleClass("no-display", false);
+    resize.resize_stream_subscribers_list();
 }
 
 function make_list_widget({

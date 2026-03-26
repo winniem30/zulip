@@ -65,6 +65,12 @@ export const single_message_content_schema = z.object({
     }),
 });
 
+export const message_render_response_schema = z.object({
+    msg: z.string(),
+    result: z.string(),
+    rendered: z.string(),
+});
+
 export const submessage_schema = z.object({
     id: z.number(),
     sender_id: z.number(),
@@ -79,7 +85,7 @@ export const raw_message_schema = z.intersection(
             avatar_url: z.nullable(z.string()),
             client: z.string(),
             content: z.string(),
-            content_type: z.literal("text/html"),
+            content_type: z.enum(["text/html", "text/x-markdown"]),
             display_recipient: display_recipient_schema,
             edit_history: z.optional(z.array(message_edit_history_entry_schema)),
             id: z.number(),
